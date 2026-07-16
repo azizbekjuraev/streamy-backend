@@ -6,4 +6,11 @@ async function register(username, password) {
   return await User.create({username, passwordHash});
 }
 
-export default register;
+async function login(username) {
+  return await User.findByUsername(username);
+}
+
+export default {
+  register,
+  login
+};

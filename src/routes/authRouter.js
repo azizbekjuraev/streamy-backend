@@ -1,9 +1,10 @@
-import registerValidationRules from "../validators/authValidator.js"
+import authValidator from "../validators/authValidator.js"
 import validate from "../validators/validate.js"
-import registerUser from "../controllers/authController.js";
+import ac from "../controllers/authController.js";
 
 let authRouter = (server) => {
-  server.post("/register", registerValidationRules, validate, registerUser)
+  server.post("/register", authValidator.registerValidationRules, validate, ac.register);
+  server.get("/login", authValidator.loginValidationRules, validate, ac.login);
 }
 
 export default authRouter;

@@ -11,6 +11,7 @@ class User {
 
   static async findByUsername(username) {
     return await db("users")
+      .select("id", "username", "password")
       .where({username: username.toLowerCase().trim()})
       .first();
   };
