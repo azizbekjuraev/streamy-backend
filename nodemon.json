@@ -1,0 +1,4 @@
+{
+  "ignore": ["node_modules", "dist", "README.md", "logs"],
+  "watch": ["src"],
+  "ext": "js, json" }
