@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 
 async function registerUser(req, res) {
   let {username, password} = req?.body;
-
   let newUser = await authService.register(username, password);
 
   return res.status(HTTP_STATUS.CREATED).json({message: "User created successfully!", user: newUser});
