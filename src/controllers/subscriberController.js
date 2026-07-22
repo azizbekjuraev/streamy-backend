@@ -26,7 +26,7 @@ async function deleteSubscriberById (req, res) {
 
   await subscriberService.deleteSubscriber(req?.params.id, channelId);
   return res.status(HTTP_STATUS.OK).json({message: "Unsubscribed from the channel successfully!"});
-}
+};
 
 export default {
   create: catchAsync(create),
