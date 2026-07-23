@@ -37,9 +37,23 @@ async function deleteVideoById(req, res) {
   return res.status(HTTP_STATUS.OK).json({message: "Video deleted successfully!"});
 };
 
+async function toggleLikeVideo(req, res) {
+  let {userId, isLiked} = req?.body;
+
+  let isLikedVideoExists = !!await videoService.getLike(userId, req?.params.id);
+  if (!isLikedVideoExists) {
+    let toggledLike = await videoService.toggleLike(userId, req?.params.id, isLiked);
+    return res.status(HTTP_STATUS.CREATED).json({message: "Video like toggled successfully!", data: toggledLike});
+  };
+
+  let toggledLike = await videoService.updateToggleLike(userId, req?.params.id, isLiked);
+  return res.status(HTTP_STATUS.OK).json({message: "Video like toggled successfully!", data: toggledLike});
+};
+
 export default {
   create: catchAsync(create),
   read: catchAsync(read),
   update: catchAsync(update),
-  delete: catchAsync(deleteVideoById)
-}
+  delete: catchAsync(deleteVideoById),
+  toggleLikeVideo: catchAsync(toggleLikeVideo)
+};

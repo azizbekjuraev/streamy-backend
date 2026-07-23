@@ -33,8 +33,22 @@ async function deleteVideoById(req, res) {
   return res.status(HTTP_STATUS.OK).json({message: "Comment deleted successfully!"});
 };
 
+async function toggleLikeComment(req, res) {
+  let {userId, isLiked} = req?.body;
+
+  let isLikedCommentExists = !!await commentService.getLike(userId, req?.params.id);
+  if (!isLikedCommentExists) {
+    let toggledLike = await commentService.toggleLike(userId, req?.params.id, isLiked);
+    return res.status(HTTP_STATUS.CREATED).json({message: "Comment like toggled successfully!", data: toggledLike});
+  };
+
+  let toggledLike = await commentService.updateToggleLike(userId, req?.params.id, isLiked);
+  return res.status(HTTP_STATUS.OK).json({message: "Comment like toggled successfully!", data: toggledLike});
+};
+
 export default {
   create: catchAsync(create),
   update: catchAsync(update),
-  delete: catchAsync(deleteVideoById)
+  delete: catchAsync(deleteVideoById),
+  toggleLikeComment: catchAsync(toggleLikeComment)
 };
