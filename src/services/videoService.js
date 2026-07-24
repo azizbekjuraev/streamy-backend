@@ -9,7 +9,7 @@ async function readVideo(userId) {
   return await Video.read({userId});
 };
 
-async function updatedVideo(id, userId, name, description, videoUrl) {
+async function updateVideo(id, userId, name, description, videoUrl) {
   return await Video.update({id, userId, name, description, videoUrl});
 };
 
@@ -36,7 +36,7 @@ async function getLike(userId, videoId) {
 export default {
   createVideo,
   readVideo,
-  updatedVideo,
+  updateVideo,
   deleteVideo,
   getVideo,
   toggleLike,

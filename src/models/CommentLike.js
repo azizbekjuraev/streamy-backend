@@ -2,20 +2,20 @@ import db from "../config/db.js";
 
 async function create({userId, commentId, isLiked}) {
   return await db("comment_likes")
-    .insert({user_id: userId, comment_id: commentId, is_liked: isLiked})
-    .returning(["user_id", "comment_id", "is_liked", "created_at"]);
+    .insert({userId, commentId, isLiked})
+    .returning(["userId", "commentId", "isLiked", "createdAt"]);
 };
 
 async function update({userId, commentId, isLiked}) {
   return await db("comment_likes")
-    .where({user_id: userId, comment_id: commentId})
-    .update({is_liked: isLiked})
-    .returning(["user_id", "comment_id", "is_liked", "updated_at"]);
+    .where({userId, commentId})
+    .update({isLiked})
+    .returning(["userId", "commentId", "isLiked", "updatedAt"]);
 };
 
 async function getById({userId, commentId}) {
   return await db("comment_likes")
-    .where({user_id: userId, comment_id: commentId})
+    .where({userId, commentId})
     .first();
 };
 

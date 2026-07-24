@@ -2,20 +2,20 @@ import db from "../config/db.js";
 
 async function create({userId, videoId, isLiked}) {
   return await db("video_likes")
-    .insert({user_id: userId, video_id: videoId, is_liked: isLiked})
-    .returning(["user_id", "video_id", "is_liked", "created_at"]);
+    .insert({userId, videoId, isLiked})
+    .returning(["userId", "videoId", "isLiked", "createdAt"]);
 };
 
 async function update({userId, videoId, isLiked}) {
   return await db("video_likes")
-    .where({user_id: userId, video_id: videoId})
-    .update({is_liked: isLiked})
-    .returning(["user_id", "video_id", "is_liked", "updated_at"]);
+    .where({userId, videoId})
+    .update({isLiked})
+    .returning(["userId", "videoId", "isLiked", "updatedAt"]);
 };
 
 async function getById({userId, videoId}) {
   return await db("video_likes")
-    .where({user_id: userId, video_id: videoId})
+    .where({ userId, videoId})
     .first();
 };
 

@@ -3,7 +3,7 @@ import subscriberService from "../services/subscriberService.js";
 import catchAsync from "../utils/catchAsync.js";
 
 async function create (req, res) {
-  let {subscriberId, channelId} = req?.body;
+  let {subscriberId, channelId} = req.body;
 
   let isSubscriberExist = !!await subscriberService.getSubscriber(subscriberId, channelId);
 
@@ -18,13 +18,13 @@ async function create (req, res) {
 async function deleteSubscriberById (req, res) {
   let {channelId} = req.body;
 
-  let isSubscriberExist = !!await subscriberService.getSubscriber(req?.params.id, channelId);
+  let isSubscriberExist = !!await subscriberService.getSubscriber(req.params.id, channelId);
 
   if (!isSubscriberExist) {
     return res.status(HTTP_STATUS.NOT_FOUND).json({message: "User have not subscribed to this channel."});
   };
 
-  await subscriberService.deleteSubscriber(req?.params.id, channelId);
+  await subscriberService.deleteSubscriber(req.params.id, channelId);
   return res.status(HTTP_STATUS.OK).json({message: "Unsubscribed from the channel successfully!"});
 };
 

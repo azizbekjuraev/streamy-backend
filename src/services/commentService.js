@@ -9,7 +9,7 @@ async function updateComment(userId, commentId, comment) {
   return await Comment.update({userId, commentId, comment});
 };
 
-async function deleteVideo(userId, commentId) {
+async function deleteComment(userId, commentId) {
   return await Comment.deleteById({userId, commentId});
 };
 
@@ -32,7 +32,7 @@ async function getLike(userId, commentId) {
 export default {
   createComment,
   updateComment,
-  deleteVideo,
+  deleteComment,
   getComment,
   toggleLike,
   updateToggleLike,

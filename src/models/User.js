@@ -3,7 +3,7 @@ import db from "../config/db.js";
 async function create({username, passwordHash}) {
   let [newUser] = await db("users")
     .insert({username, password: passwordHash})
-    .returning(["id", "username", "created_at"]);
+    .returning(["id", "username", "createdAt"]);
 
   return newUser;
 };
@@ -17,14 +17,14 @@ async function findByUsername(username) {
 
 async function findById(id) {
   return await db("users")
-    .select("id", "username", "created_at")
+    .select("id", "username", "createdAt")
     .where({id})
     .first();
 };
 
 async function getAll() {
   return await db("users")
-    .select("id", "username", "created_at");
+    .select("id", "username", "createdAt");
 };
 
 export default {
@@ -32,4 +32,4 @@ export default {
   findByUsername,
   findById,
   getAll
-}
+};
